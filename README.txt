@@ -1,10 +1,10 @@
-package gemini // import "github.com/jackdoe/net-gemini"
+`package gemini // import "github.com/jackdoe/net-gemini"`
 
 gemini server implementation, check out gemini://gemini.circumlunar.space/
 inspired by https://tildegit.org/solderpunk/molly-brown
 
 Example:
-
+```
      package main
 
      import (
@@ -27,11 +27,11 @@ Example:
     	gemini.Handle("/", gemini.FileServer(*root))
      	log.Fatal(gemini.ListenAndServeTLS("localhost:1965", "localhost.crt", "localhost.key"))
      }
-
+```
 You can also checkout cmd/main.go as an example.
 
 Make sure to generate your cert for localhost:
-
+```
     openssl req \
             -x509 \
             -out localhost.crt \
@@ -42,9 +42,11 @@ Make sure to generate your cert for localhost:
             -subj '/CN=localhost' \
             -extensions EXT \
             -config <( printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+```
 
 CONSTANTS
 
+```
 const (
 	StatusInput                              = 10
 	StatusSuccess                            = 20
@@ -68,16 +70,16 @@ const (
 	StatusFutureCertRejected                 = 64
 	StatusExpiredCertRejected                = 65
 )
-
+```
 FUNCTIONS
-
+```
 func Handle(p string, h Handler)
 func HandleFunc(p string, f HandlerFunc)
 func ListenAndServeTLS(addr string, certFile, keyFile string) error
 func ServeFilePath(p string, w *Response, r *Request)
-
+```
 TYPES
-
+```
 type Handler interface {
 	ServeGemini(*Response, *Request)
 }
@@ -116,3 +118,4 @@ func (s *Server) ListenAndServeTLS(certFile, keyFile string) error
 
 type Status int
 
+```
